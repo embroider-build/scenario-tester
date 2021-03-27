@@ -1,0 +1,32 @@
+{
+  "name": "scenario-tester",
+  "version": "0.1.0",
+  "bin": {
+    "scenario-tester": "./cli.js"
+  },
+  "scripts": {
+    "prepare": "tsc",
+    "start": "tsc --watch"
+  },
+  "files": [
+    "*.js",
+    "*.d.ts",
+    "*.map"
+  ],
+  "dependencies": {
+    "@types/fs-extra": "^9.0.7",
+    "@types/tmp": "^0.2.0",
+    "@types/yargs": "^16.0.0",
+    "fixturify-project": "ef4/node-fixturify-project#dcad8d1a56c586a38f63772eb0dd70ab2751d4e6",
+    "fs-extra": "^9.1.0",
+    "glob": "^7.1.6",
+    "tmp": "^0.2.1",
+    "typescript": "^4.1.5",
+    "yargs": "^16.2.0"
+  },
+  "license": "MIT",
+  "volta": {
+    "node": "14.16.0",
+    "npm": "7.6.1"
+  }
+}

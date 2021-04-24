@@ -1,4 +1,4 @@
-import { Project } from 'fixturify-project';
+import { Project } from '@ef4/fixturify-project';
 import { setGracefulCleanup } from 'tmp';
 import { spawn } from 'child_process';
 

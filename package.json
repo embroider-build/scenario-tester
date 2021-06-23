@@ -19,7 +19,7 @@
     "@types/fs-extra": "^9.0.7",
     "@types/tmp": "^0.2.0",
     "@types/yargs": "^16.0.0",
-    "@ef4/fixturify-project": "^3.0.0",
+    "fixturify-project": "^3.0.2",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "tmp": "^0.2.1",

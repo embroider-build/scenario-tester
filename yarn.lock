@@ -2,16 +2,6 @@
 # yarn lockfile v1
 
 
-"@ef4/fixturify-project@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@ef4/fixturify-project/-/fixturify-project-3.0.0.tgz#efbf85057b085c0f89079b8deae90794b6d82d7f"
-  integrity sha512-WnLkn15zawReUmlOYn8X4Mwi+iozNGvSL22GTRF0skviN89uDcf2pi88YhiSvoJf4qldRoybyJUX0SkwRyWszA==
-  dependencies:
-    fixturify "^2.1.0"
-    resolve-package-path "^3.1.0"
-    tmp "^0.0.33"
-    type-fest "^0.11.0"
-
 "@types/fs-extra@^8.1.0":
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-8.1.1.tgz#1e49f22d09aa46e19b51c0b013cb63d0d923a068"
@@ -140,10 +130,20 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-fixturify@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/fixturify/-/fixturify-2.1.0.tgz#a0437faac9b6e4aeb35910a1214df866aeec5d75"
-  integrity sha512-gHq6UCv8DE91EpiaRSzrmvLoRvFOBzI961IQ3gXE5wfmMM1TtApDcZAonG2hnp6GJrVFCxHwP01wSw9VQJiJ1w==
+fixturify-project@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/fixturify-project/-/fixturify-project-3.0.2.tgz#c7374dbb286fbca4136d402d41da13b345add708"
+  integrity sha512-YQz3XOfQuwQ+lFVmqM9GFsnqgDBMA7eB4+NwRwXlgD0radi5FYEygKrkAUhBbFIpXGOZViF+7q35+k72I0VIKg==
+  dependencies:
+    fixturify "^2.1.1"
+    resolve-package-path "^3.1.0"
+    tmp "^0.0.33"
+    type-fest "^0.11.0"
+
+fixturify@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/fixturify/-/fixturify-2.1.1.tgz#e962d72f062600cb81a9651086f60d822c72d998"
+  integrity sha512-SRgwIMXlxkb6AUgaVjIX+jCEqdhyXu9hah7mcK+lWynjKtX73Ux1TDv71B7XyaQ+LJxkYRHl5yCL8IycAvQRUw==
   dependencies:
     "@types/fs-extra" "^8.1.0"
     "@types/minimatch" "^3.0.3"

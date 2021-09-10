@@ -130,10 +130,9 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-fixturify-project@^3.0.2:
+fixturify-project@ef4/node-fixturify-project#a223bb2b0b56c22658085fdb3631a81227962a29:
   version "3.0.2"
-  resolved "https://registry.yarnpkg.com/fixturify-project/-/fixturify-project-3.0.2.tgz#c7374dbb286fbca4136d402d41da13b345add708"
-  integrity sha512-YQz3XOfQuwQ+lFVmqM9GFsnqgDBMA7eB4+NwRwXlgD0radi5FYEygKrkAUhBbFIpXGOZViF+7q35+k72I0VIKg==
+  resolved "https://codeload.github.com/ef4/node-fixturify-project/tar.gz/a223bb2b0b56c22658085fdb3631a81227962a29"
   dependencies:
     fixturify "^2.1.1"
     resolve-package-path "^3.1.0"

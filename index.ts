@@ -20,10 +20,14 @@ type State =
     };
 
 export class Scenarios {
-  static fromDir(appPath: string): Scenarios {
+  static fromDir(appPath: string, as: 'app' | 'lib' = 'app'): Scenarios {
     return new this({
       type: 'root',
-      root: () => Project.fromDir(appPath, { linkDeps: true }),
+      root: () =>
+        Project.fromDir(
+          appPath,
+          as === 'app' ? { linkDevDeps: true } : { linkDeps: true }
+        ),
     });
   }
 

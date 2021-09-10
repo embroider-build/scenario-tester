@@ -29,6 +29,11 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.4.tgz#f0ec25dbf2f0e4b18647313ac031134ca5b24b21"
   integrity sha512-1z8k4wzFnNjVK/tlxvrWuK5WMt6mydWWP7+zvH5eFep4oj+UkrfiJTRtjCeBXNpwaA/FYqqtb4/QS4ianFpIRA==
 
+"@types/minimatch@^3.0.4":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.5.tgz#1001cc5e6a3704b83c236027e77f2f58ea010f40"
+  integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
+
 "@types/node@*":
   version "14.14.37"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.37.tgz#a3dd8da4eb84a996c36e331df98d82abd76b516e"
@@ -130,15 +135,16 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-fixturify-project@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/fixturify-project/-/fixturify-project-3.0.2.tgz#c7374dbb286fbca4136d402d41da13b345add708"
-  integrity sha512-YQz3XOfQuwQ+lFVmqM9GFsnqgDBMA7eB4+NwRwXlgD0radi5FYEygKrkAUhBbFIpXGOZViF+7q35+k72I0VIKg==
+fixturify-project@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/fixturify-project/-/fixturify-project-4.0.0.tgz#a0710d27dd8cab51c0c6f2ebfe4df072c3c105db"
+  integrity sha512-nz5BmTE7luowWwaDyqFdPCu4iTRYJF5x53gaGLLw7wCmbiANZa8dUOH4GmRQQD+Lnvu44+LQ4GbpMBV8QKkOlg==
   dependencies:
     fixturify "^2.1.1"
     resolve-package-path "^3.1.0"
     tmp "^0.0.33"
     type-fest "^0.11.0"
+    walk-sync "^3.0.0"
 
 fixturify@^2.1.1:
   version "2.1.1"
@@ -386,6 +392,16 @@ walk-sync@^2.0.2:
     "@types/minimatch" "^3.0.3"
     ensure-posix-path "^1.1.0"
     matcher-collection "^2.0.0"
+    minimatch "^3.0.4"
+
+walk-sync@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/walk-sync/-/walk-sync-3.0.0.tgz#67f882925021e20569a1edd560b8da31da8d171c"
+  integrity sha512-41TvKmDGVpm2iuH7o+DAOt06yyu/cSHpX3uzAwetzASvlNtVddgIjXIb2DfB/Wa20B1Jo86+1Dv1CraSU7hWdw==
+  dependencies:
+    "@types/minimatch" "^3.0.4"
+    ensure-posix-path "^1.1.0"
+    matcher-collection "^2.0.1"
     minimatch "^3.0.4"
 
 wrap-ansi@^7.0.0:

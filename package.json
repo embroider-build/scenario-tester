@@ -16,7 +16,7 @@
     "*.map"
   ],
   "dependencies": {
-    "fixturify-project": "^3.0.2",
+    "fixturify-project": "4.0.0",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "tmp": "^0.2.1",

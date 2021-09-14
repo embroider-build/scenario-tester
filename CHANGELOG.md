@@ -1,3 +1,7 @@
+# 2.0.1
+
+- BUGFIX: loosen our semver requirement on fixturify-project and bump minimum version to get important fix
+
 # 2.0.0
 
 - BREAKING: upgrading fixturify-project from 3.x to 4.x. I'm treating this as breaking because we re-exports `Project` as part of our own API.

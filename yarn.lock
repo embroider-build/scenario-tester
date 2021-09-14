@@ -135,15 +135,15 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-fixturify-project@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/fixturify-project/-/fixturify-project-4.0.0.tgz#a0710d27dd8cab51c0c6f2ebfe4df072c3c105db"
-  integrity sha512-nz5BmTE7luowWwaDyqFdPCu4iTRYJF5x53gaGLLw7wCmbiANZa8dUOH4GmRQQD+Lnvu44+LQ4GbpMBV8QKkOlg==
+fixturify-project@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/fixturify-project/-/fixturify-project-4.0.1.tgz#9c9a29690b0b6f87654a67f9f56972cf97dd6b9a"
+  integrity sha512-WSWVgJl2bjrxj68HBo35fE/DXwVtVef5J07O/v22J0HbZNb72QVPeyaLyK4vw9M6SNIwkOxg/YAdBQSIETLCUA==
   dependencies:
     fixturify "^2.1.1"
     resolve-package-path "^3.1.0"
     tmp "^0.0.33"
-    type-fest "^0.11.0"
+    type-fest "^2.3.2"
     walk-sync "^3.0.0"
 
 fixturify@^2.1.1:
@@ -364,10 +364,10 @@ tmp@^0.2.1:
   dependencies:
     rimraf "^3.0.0"
 
-type-fest@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.11.0.tgz#97abf0872310fed88a5c466b25681576145e33f1"
-  integrity sha512-OdjXJxnCN1AvyLSzeKIgXTXxV+99ZuXl3Hpo9XpJAv9MBcHrrJOQ5kV7ypXOuQie+AmWG25hLbiKdwYTifzcfQ==
+type-fest@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.3.2.tgz#bb91f7ff24788ed81e28463eb94e5a1306f5bab3"
+  integrity sha512-cfvZ1nOC/VqAt8bVOIlFz8x+HdDASpiFYrSi0U0nzcAFlOnzzQ/gsPg2PP1uqjreO7sQCtraYJHMduXSewQsSA==
 
 typescript@^4.4.2:
   version "4.4.2"

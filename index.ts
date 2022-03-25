@@ -167,7 +167,7 @@ export class PreparedApp {
   ): Promise<{ exitCode: number; stderr: string; stdout: string; output: string }> {
     let env: Record<string, string> | undefined;
     if (opts?.env) {
-      env = Object.assign({}, process.env, opts.env);
+      env = opts.env;
     }
     let child = spawn(shellCommand, { stdio: ['inherit', 'pipe', 'pipe'], cwd: this.dir, shell: true, env });
     let stderrBuffer: string[] = [];

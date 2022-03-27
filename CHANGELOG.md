@@ -1,3 +1,7 @@
+# 2.1.0
+
+- ENHANCEMENT: ensure node_modules/.bin is used inside of the scenario by @krisselden
+
 # 2.0.0
 
 - BREAKING: upgrading fixturify-project from 3.x to 4.x. I'm treating this as breaking because we re-exports `Project` as part of our own API.

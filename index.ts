@@ -24,10 +24,7 @@ export class Scenarios {
     return new this({
       type: 'root',
       root: () =>
-        Project.fromDir(
-          appPath,
-          as === 'app' ? { linkDevDeps: true } : { linkDeps: true }
-        ),
+        Project.fromDir(appPath, as === 'app' ? { linkDevDeps: true } : { linkDeps: true }),
     });
   }
 
@@ -42,7 +39,9 @@ export class Scenarios {
     return new Scenarios({
       type: 'derived',
       parent: this,
-      variants: Object.fromEntries(Object.entries(variants).map(([variantName, mutator]) => [variantName, [mutator]])),
+      variants: Object.fromEntries(
+        Object.entries(variants).map(([variantName, mutator]) => [variantName, [mutator]])
+      ),
     });
   }
 
@@ -52,9 +51,9 @@ export class Scenarios {
     }
     if (!this.state.variants[variantName]) {
       throw new Error(
-        `no variant named ${variantName} available to skip. Found variants: ${Object.keys(this.state.variants).join(
-          ', '
-        )}`
+        `no variant named ${variantName} available to skip. Found variants: ${Object.keys(
+          this.state.variants
+        ).join(', ')}`
       );
     }
     let variants = Object.assign({}, this.state.variants);
@@ -72,9 +71,9 @@ export class Scenarios {
     }
     if (!this.state.variants[variantName]) {
       throw new Error(
-        `no variant named ${variantName} available to select via "only". Found variants: ${Object.keys(this.state.variants).join(
-          ', '
-        )}`
+        `no variant named ${variantName} available to select via "only". Found variants: ${Object.keys(
+          this.state.variants
+        ).join(', ')}`
       );
     }
     let variants = { [variantName]: this.state.variants[variantName] };
@@ -84,7 +83,6 @@ export class Scenarios {
       variants,
     });
   }
-
 
   map(name: string, fn: ProjectMutator): Scenarios {
     if (this.state.type === 'root') {
@@ -110,16 +108,24 @@ export class Scenarios {
   }
 
   private iterate(
-    fn: (args: { name: string | undefined; root: () => Project | Promise<Project>; mutators: ProjectMutator[] }) => void
+    fn: (args: {
+      name: string | undefined;
+      root: () => Project | Promise<Project>;
+      mutators: ProjectMutator[];
+    }) => void
   ): void {
     if (this.state.type === 'root') {
       fn({ name: undefined, root: this.state.root, mutators: [] });
     } else {
       let state = this.state;
-      this.state.parent.iterate(parent => {
+      this.state.parent.iterate((parent) => {
         for (let [variantName, mutators] of Object.entries(state.variants)) {
           let combinedName = parent.name ? `${parent.name}-${variantName}` : variantName;
-          fn({ name: combinedName, root: parent.root, mutators: [...parent.mutators, ...mutators] });
+          fn({
+            name: combinedName,
+            root: parent.root,
+            mutators: [...parent.mutators, ...mutators],
+          });
         }
       });
     }
@@ -154,7 +160,7 @@ export class Scenario {
     if (outdir) {
       project.baseDir = outdir;
     }
-    project.writeSync();
+    await project.write();
     return new PreparedApp(project.baseDir);
   }
 }
@@ -164,24 +170,34 @@ export class PreparedApp {
   async execute(
     shellCommand: string,
     opts?: { env?: Record<string, string> }
-  ): Promise<{ exitCode: number; stderr: string; stdout: string; output: string }> {
-    let env: Record<string, string> | undefined;
+  ): Promise<{
+    exitCode: number;
+    stderr: string;
+    stdout: string;
+    output: string;
+  }> {
+    let env: Record<string, string | undefined> | undefined;
     if (opts?.env) {
-      env = opts.env;
+      env = { ...process.env, ...opts.env };
     }
-    let child = spawn(shellCommand, { stdio: ['inherit', 'pipe', 'pipe'], cwd: this.dir, shell: true, env });
+    let child = spawn(shellCommand, {
+      stdio: ['inherit', 'pipe', 'pipe'],
+      cwd: this.dir,
+      shell: true,
+      env,
+    });
     let stderrBuffer: string[] = [];
     let stdoutBuffer: string[] = [];
     let combinedBuffer: string[] = [];
-    child.stderr.on('data', data => {
+    child.stderr.on('data', (data) => {
       stderrBuffer.push(data);
       combinedBuffer.push(data);
     });
-    child.stdout.on('data', data => {
+    child.stdout.on('data', (data) => {
       stdoutBuffer.push(data);
       combinedBuffer.push(data);
     });
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       child.on('close', (exitCode: number) => {
         resolve({
           exitCode,

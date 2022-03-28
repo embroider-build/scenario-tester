@@ -1,0 +1,12 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "qunit test.js"
+  },
+  "dependencies": {
+    "hello": ">1.0.0",
+    "qunit": "^2.18.0"
+  }
+}

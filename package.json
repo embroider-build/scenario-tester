@@ -6,6 +6,7 @@
   "bin": {
     "scenario-tester": "./cli.js"
   },
+  "main": "index.js",
   "scripts": {
     "prepare": "tsc",
     "start": "tsc --watch",
@@ -14,7 +15,8 @@
   "files": [
     "*.js",
     "*.d.ts",
-    "*.map"
+    "*.map",
+    "!test.*"
   ],
   "dependencies": {
     "fixturify-project": "^4.1.1",

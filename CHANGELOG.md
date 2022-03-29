@@ -1,3 +1,7 @@
+# 2.1.1
+
+- BUGFIX: Fixes issues with 2.1.0
+
 # 2.1.0
 
 - ENHANCEMENT: ensure node_modules/.bin is used inside of the scenario by @krisselden

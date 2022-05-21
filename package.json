@@ -19,7 +19,7 @@
     "!test.*"
   ],
   "dependencies": {
-    "fixturify-project": "^4.1.1",
+    "fixturify-project": "^5.0.0",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "tmp": "^0.2.1",

@@ -2,7 +2,7 @@
   "name": "scenario-tester",
   "author": "Edward Faulkner <edward@eaf4.com>",
   "repository": "https://github.com/ef4/scenario-tester",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "bin": {
     "scenario-tester": "./cli.js"
   },

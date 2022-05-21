@@ -1,3 +1,7 @@
+# 2.1.2
+
+- BUGFIX: upgrade fixturify-project for upstream bug fixes
+
 # 2.1.1
 
 - BUGFIX: Fixes issues with 2.1.0

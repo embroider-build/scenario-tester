@@ -77,6 +77,56 @@ The power in this kind of setup comes when you start adding in different depende
 npx qunit *-test.js
 ```
 
+This will run each of the tests in your setup sequentially. This can take a while, so on CI it can be useful to run all your scenarios in paralell. For this we need your CI to be able to discover all the possible tests that are available and run one specific test. 
+
+**Note:** all of our examples are using Gihub Actions so your CI provider may need a different setup
+
+## CI Setup
+
+The first job in your CI will need to discover all the tests that are available to use: 
+
+```yaml
+jobs:
+  discover_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: npm
+      - run: npm install
+      - id: set-matrix
+        working-directory: test-packages/test-scenarios
+        run: echo "::set-output name=matrix::$(npm run --silent test:list -- --matrix 'npm run test -- --filter %s:')"
+```
+
+This will generate a matrix for you that will contain a command to filter down to just one test. You can then use this to run the test in another job: 
+
+```yaml
+jobs:
+  scenarios:
+    needs: discover_matrix
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.discover_matrix.outputs.matrix)}}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: npm
+      - run: npm ci
+      - name: test
+        run: ${{ matrix.command }}
+        working-directory: test-packages/test-scenarios
+```
+
+
 
 
 

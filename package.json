@@ -12,6 +12,7 @@
     "start": "tsc --watch",
     "test": "concurrently --no-color \"npm:test:*\" --names \"test:\"",
     "test:ts": "node --loader ts-node/esm node_modules/.bin/qunit --require ts-node/register tests/test.ts",
+    "test:cjs": "qunit tests/test.cjs",
     "test:mjs": "qunit tests/test.mjs",
     "docs": "typedoc index.ts --out typedoc/",
     "docs:watch": "yarn docs -- --watch",

@@ -1,24 +1,24 @@
 import { Project } from 'fixturify-project';
-import { Scenarios } from './index';
+import { Scenarios } from './index.js';
 import type { PreparedApp } from './index';
-import Qunit = require('qunit');
-import child_process = require('child_process');
+import Qunit from 'qunit';
+import child_process from 'child_process';
 
 function hello1(project: Project) {
   project.linkDependency('hello', {
-    baseDir: __dirname + '/fixtures',
+    baseDir: './fixtures',
     resolveName: 'hello1',
   });
 }
 
 function hello2(project: Project) {
   project.linkDependency('hello', {
-    baseDir: __dirname + '/fixtures',
+    baseDir: './fixtures',
     resolveName: 'hello',
   });
 }
 
-const scenarios = Scenarios.fromDir(__dirname + '/fixtures/app').expand({
+const scenarios = Scenarios.fromDir('./fixtures/app').expand({
   hello1,
   hello2,
 });

@@ -2,7 +2,7 @@
 
 import yargs from 'yargs';
 
-yargs
+yargs(process.argv.slice(2))
   .demandCommand(1, 'Use one of the above commands')
   .command(
     'list',
@@ -22,7 +22,7 @@ yargs
         .array('require')
         .option('matrix', { type: 'string' }),
     async argv => {
-      let mod = await import('./list');
+      let mod = await import('./list.js');
       await mod.printList(argv);
     }
   )
@@ -53,7 +53,7 @@ yargs
         })
         .array('require'),
     async argv => {
-      let mod = await import('./output');
+      let mod = await import('./output.js');
       await mod.output(argv);
     }
   )

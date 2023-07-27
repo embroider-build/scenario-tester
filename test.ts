@@ -23,15 +23,17 @@ const scenarios = Scenarios.fromDir(__dirname + '/fixtures/app').expand({
   hello2,
 });
 
+type TestContext = { app: PreparedApp };
+
 scenarios.forEachScenario((scenario) => {
   Qunit.module(scenario.name, (hooks) => {
-    hooks.before(async function (this: { app: PreparedApp }) {
+    hooks.before(async function (this: TestContext) {
       this.app = await scenario.prepare();
     });
 
     Qunit.test(
       'yarn test',
-      async function (this: { app: PreparedApp }, assert) {
+      async function (this: TestContext, assert) {
         const result = await this.app.execute('yarn --silent test');
         assert.equal(
           result.stdout,
@@ -49,7 +51,7 @@ ok 1 project > createHello
 
     Qunit.test(
       'yarn bin inside app',
-      async function (this: { app: PreparedApp }, assert) {
+      async function (this: TestContext, assert) {
         let result = await this.app.execute('yarn --silent bin');
         const yarnBin = result.stdout.trimRight();
         assert.ok(yarnBin.startsWith(this.app.dir));
@@ -60,7 +62,7 @@ ok 1 project > createHello
 
     Qunit.test(
       'check scenario',
-      async function (this: { app: PreparedApp }, assert) {
+      async function (this: TestContext, assert) {
         let result = await this.app.execute(
           `node -p 'require("./index").polyfilled'`
         );

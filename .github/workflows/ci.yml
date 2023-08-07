@@ -37,4 +37,5 @@ jobs:
       - name: yarn prepare
         if: steps.yarn-cache.outputs.cache-hit == 'true'
         run: yarn prepare
+      - run: yarn lint
       - run: yarn test

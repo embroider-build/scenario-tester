@@ -4,3 +4,4 @@
 /*.js.map
 /*.log
 /typedoc
+!.eslintrc.js

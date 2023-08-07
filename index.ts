@@ -4,38 +4,57 @@ import { spawn } from 'child_process';
 
 setGracefulCleanup();
 
-type ProjectMutator = (project: Project) => void | Promise<void>;
+/**
+ * A callback used by some of classes to obtain a {@link Project}.
+ * 
+ * You are supposed to pass such a callback. In it, you should create and return a {@link Project}
+ * instance.
+ * 
+ * @returns A {@link Project} instance, optionally wrapped into a promise.
+ */
+
+export type CallbackCreateProject = () => Project | Promise<Project>;
+
+/**
+ * A callback used to customize an existing {@link Scenario}. In it, you receive a {@link Project}
+ * instance and you can do stuff with it in order to adjust the project's codebase to the specific
+ * needs of a given scenario.
+ * 
+ */
+export type CallbackMutateProject = (project: Project) => void | Promise<void>;
 
 export { Project };
 
 type State =
   | {
       type: 'root';
-      root: () => Project | Promise<Project>;
+      callbackCreateProject: CallbackCreateProject;
     }
   | {
       type: 'derived';
       parent: Scenarios;
-      variants: Record<string, ProjectMutator[]>;
+      variants: Record<string, CallbackMutateProject[]>;
     };
 
 export class Scenarios {
+  private constructor(private state: State) {}
+
   static fromDir(appPath: string, as: 'app' | 'lib' = 'app'): Scenarios {
     return new this({
       type: 'root',
-      root: () =>
+      callbackCreateProject: () =>
         Project.fromDir(appPath, as === 'app' ? { linkDevDeps: true } : { linkDeps: true }),
     });
   }
 
-  static fromProject(fn: () => Promise<Project> | Project): Scenarios {
+  static fromProject(callbackCreateProject: CallbackCreateProject): Scenarios {
     return new this({
       type: 'root',
-      root: fn,
+      callbackCreateProject: callbackCreateProject,
     });
   }
 
-  expand(variants: Record<string, ProjectMutator>): Scenarios {
+  expand(variants: Record<string, CallbackMutateProject>): Scenarios {
     return new Scenarios({
       type: 'derived',
       parent: this,
@@ -84,13 +103,13 @@ export class Scenarios {
     });
   }
 
-  map(name: string, fn: ProjectMutator): Scenarios {
+  map(name: string, callbackMutateProject: CallbackMutateProject): Scenarios {
     if (this.state.type === 'root') {
       return new Scenarios({
         type: 'derived',
         parent: this,
         variants: {
-          [name]: [fn],
+          [name]: [callbackMutateProject],
         },
       });
     } else {
@@ -100,7 +119,7 @@ export class Scenarios {
         variants: Object.fromEntries(
           Object.entries(this.state.variants).map(([variantName, mutators]) => [
             `${variantName}-${name}`,
-            [...mutators, fn],
+            [...mutators, callbackMutateProject],
           ])
         ),
       });
@@ -110,12 +129,12 @@ export class Scenarios {
   private iterate(
     fn: (args: {
       name: string | undefined;
-      root: () => Project | Promise<Project>;
-      mutators: ProjectMutator[];
+      callbackCreateProject: CallbackCreateProject;
+      mutators: CallbackMutateProject[];
     }) => void
   ): void {
     if (this.state.type === 'root') {
-      fn({ name: undefined, root: this.state.root, mutators: [] });
+      fn({ name: undefined, callbackCreateProject: this.state.callbackCreateProject, mutators: [] });
     } else {
       let state = this.state;
       this.state.parent.iterate((parent) => {
@@ -123,7 +142,7 @@ export class Scenarios {
           let combinedName = parent.name ? `${parent.name}-${variantName}` : variantName;
           fn({
             name: combinedName,
-            root: parent.root,
+            callbackCreateProject: parent.callbackCreateProject,
             mutators: [...parent.mutators, ...mutators],
           });
         }
@@ -132,12 +151,10 @@ export class Scenarios {
   }
 
   forEachScenario(fn: (appDefinition: Scenario) => void): void {
-    this.iterate(({ name, root, mutators }) => {
-      fn(new Scenario(name ?? '<root>', root, mutators));
+    this.iterate(({ name, callbackCreateProject, mutators }) => {
+      fn(new Scenario(name ?? '<root>', callbackCreateProject, mutators));
     });
   }
-
-  private constructor(private state: State) {}
 }
 
 export const seenScenarios: Scenario[] = [];
@@ -145,14 +162,14 @@ export const seenScenarios: Scenario[] = [];
 export class Scenario {
   constructor(
     public name: string,
-    private getBaseScenario: () => Project | Promise<Project>,
-    private mutators: ProjectMutator[]
+    private callbackCreateProject: CallbackCreateProject,
+    private mutators: CallbackMutateProject[]
   ) {
     seenScenarios.push(this);
   }
 
   async prepare(outdir?: string): Promise<PreparedApp> {
-    let project = await this.getBaseScenario();
+    let project = await this.callbackCreateProject();
     for (let fn of this.mutators) {
       await fn(project);
     }

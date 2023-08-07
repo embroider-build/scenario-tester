@@ -11,7 +11,10 @@
     "prepare": "tsc",
     "start": "tsc --watch",
     "test": "qunit test.js",
-    "typedoc": "typedoc index.ts --out typedoc/"
+    "docs": "typedoc index.ts --out typedoc/",
+    "docs:watch": "yarn docs -- --watch",
+    "docs:serve": "browser-sync start --server \"typedoc/\" --files \"**/*.html\"",
+    "docs:dev": "concurrently \"yarn docs:watch\" \"yarn docs:serve\""
   },
   "files": [
     "*.js",
@@ -36,6 +39,8 @@
     "@types/qunit": "^2.11.3",
     "@types/tmp": "^0.2.0",
     "@types/yargs": "^16.0.0",
+    "browser-sync": "^2.29.3",
+    "concurrently": "^8.2.0",
     "qunit": "^2.18.0",
     "typedoc": "^0.24.8",
     "typescript": "^5.1.6"

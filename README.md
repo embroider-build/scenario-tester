@@ -75,7 +75,7 @@ Note: no new project codebases will be emitted to your filesystem until `forEach
 
 Instead of defining a template project from disk as shown above, you can do it programmatically.
 
-`scenario-tester` relies on [stefanpenner/node-fixturify-project](https://github.com/stefanpenner/node-fixturify-project) (npm package [fixturify-project](https://www.npmjs.com/package/fixturify-project)).
+`scenario-tester` relies on [fixturify-project](https://www.npmjs.com/package/fixturify-project).
 
 `fixturify-project` converts codebases between a filesystem representation and a JSON representation. For example, it lets you define a project (a test app or an npm package) as JSON:
 
@@ -112,7 +112,7 @@ This produces the following structure on disk:
 /tmp/my-project/dirname1/filename2.js
 ```
 
-You can add dependencies to a project:
+You can add mock dependencies to a project:
 
 ```js
 project.addDependency('mocha', '5.2.0');
@@ -129,20 +129,13 @@ This will result in the follwing file/folder structure:
 /tmp/my-project/filename1.js
 /tmp/my-project/dirname1/filename2.json
 
-# Dummy node_modules for added dependencies
 /tmp/my-project/node_modules/mocha/index.js
 /tmp/my-project/node_modules/mocha/package.json
 /tmp/my-project/node_modules/chai/index.json
 /tmp/my-project/node_modules/chai/package.json
 ```
 
-❓ You can then replace dummy `node_modules/` with real ones:
-
-```
-cd /tmp/my-project
-rm -r node_modules/
-pnpm i
-```
+If you want real dependencies, use `project.linkDevDependency` instead of `addDependency`.
 
 ## Providing multiple versions of the same package
 
@@ -192,7 +185,6 @@ You can achieve that with the following methods on the `Scenarios` class:
 
 * `skip` — removes one scenario with the given name from collection, returns new collection;
 * `only` — returns new collection containing only the scenario with the given name;
-* `filter` (⚠ does not exist yet) — returns a subset of scenarios, filtered using a callback;
 * `map` — lets you all scenarios in collection.
 
 Consider this example:
@@ -283,7 +275,7 @@ The other two commands delegate to `scenario-tester`:
 
     * `--require <package-name>` — require a package before starting, e. g. `ts-node/register` if your test files are in TypeScript
     * `--files <glob>` — which files to look in.
-    * `--matrix <format string>` — ❓ process scenario names with [util.format](https://nodejs.org/api/util.html#utilformatformat-args) and output as JSON.
+    * `--matrix <format string>` — process scenario names with [util.format](https://nodejs.org/api/util.html#utilformatformat-args) and output as JSON that can be used to configure a test matrix in GitHub CI.
 
 * `scenario-tester output` — emit derivative projects to filesystem without running the test suite.
 

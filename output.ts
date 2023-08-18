@@ -1,5 +1,5 @@
-import { removeSync } from 'fs-extra';
-import { list, ListParams } from './list';
+import fs from 'fs-extra';
+import { list, ListParams } from './list.js';
 
 export interface OutputParams extends ListParams {
   scenario: string;
@@ -11,7 +11,7 @@ export async function output(params: OutputParams) {
   for (let scenario of scenarios) {
     if (scenario.name.indexOf(params.scenario) !== -1) {
       process.stdout.write(`Found scenario ${scenario.name}\n`);
-      removeSync(params.outdir);
+      fs.removeSync(params.outdir);
       await scenario.prepare(params.outdir);
       process.stdout.write(`Wrote successfully to ${params.outdir}\n`);
       return;

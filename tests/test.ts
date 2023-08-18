@@ -1,24 +1,24 @@
 import { Project } from 'fixturify-project';
-import { Scenarios } from './index';
-import type { PreparedApp } from './index';
-import Qunit = require('qunit');
-import child_process = require('child_process');
+import { Scenarios } from '../index.js';
+import type { PreparedApp } from '../index.js';
+import Qunit from 'qunit';
+import execa from 'execa';
 
 function hello1(project: Project) {
   project.linkDependency('hello', {
-    baseDir: __dirname + '/fixtures',
+    baseDir: './tests/fixtures',
     resolveName: 'hello1',
   });
 }
 
 function hello2(project: Project) {
   project.linkDependency('hello', {
-    baseDir: __dirname + '/fixtures',
+    baseDir: './tests/fixtures',
     resolveName: 'hello',
   });
 }
 
-const scenarios = Scenarios.fromDir(__dirname + '/fixtures/app').expand({
+const scenarios = Scenarios.fromDir('./tests/fixtures/app').expand({
   hello1,
   hello2,
 });
@@ -76,16 +76,14 @@ ok 1 project > createHello
 });
 
 Qunit.module('cli', () => {
-  Qunit.test('list', (assert) => {
+  Qunit.test('list', async (assert) => {
+    // I tried to test this using the ts file dirrectly but I couldn't get ts-node/require to work correctly
+    // so I'm just testing against the compiled esm output
+    const result = await execa('npx', ['.', 'list', '--files', './build/tests/test.js', '--matrix'])
+
+    const { stdout } = result;
     assert.deepEqual(
-      child_process
-        .execFileSync(
-          process.execPath,
-          ['cli.js', 'list', '--files', 'test.js', '--matrix'],
-          { encoding: 'utf8' }
-        )
-        .trimRight()
-        .split('\n'),
+        stdout.split('\n'),
       ['hello1', 'hello2']
     );
   });

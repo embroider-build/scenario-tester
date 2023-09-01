@@ -37,6 +37,9 @@
     "node": "18.17.0",
     "yarn": "1.22.18"
   },
+  "resolutions": {
+    "type-fest": "^3.0.0"
+  },
   "devDependencies": {
     "@types/fs-extra": "^9.0.7",
     "@types/qunit": "^2.11.3",

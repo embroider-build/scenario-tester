@@ -2,3 +2,6 @@
 /*.d.ts
 /*.js
 /*.js.map
+/*.log
+/typedoc
+!.eslintrc.js

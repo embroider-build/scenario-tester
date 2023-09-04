@@ -15,7 +15,7 @@
     "docs:watch": "yarn docs -- --watch",
     "docs:serve": "browser-sync start --server \"typedoc/\" --files \"**/*.html\"",
     "docs:dev": "concurrently \"yarn docs:watch\" \"yarn docs:serve\"",
-    "lint": "eslint \"{index,cli}.ts\""
+    "lint": "eslint '*.ts'"
   },
   "files": [
     "*.js",

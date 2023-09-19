@@ -205,7 +205,7 @@ export class Scenarios {
    */
   only(variantName: string): Scenarios {
     if (this.state.type === 'root') {
-      throw new Error(`root scenario cannot be skipped`);
+      throw new Error(`root scenario cannot be skipped (you asked to skip "${variantName}")`);
     }
     if (!this.state.variants[variantName]) {
       throw new Error(
@@ -223,7 +223,8 @@ export class Scenarios {
   }
 
   /**
-   * Adds more {@link CallbackMutateProject} callbacks to all derived scenarios.
+   * Produces a new `Scenarios` instance by deriving new scenarios (aka `variants`) from each of
+   * the previously defined ones.
    *
    * If the `Scenarios` instance only contains a base scenario, then adds one derived scenario on
    * top of it. The name of the derived scenario will be the same as the base one.
@@ -240,7 +241,10 @@ export class Scenarios {
    * @param callbackMutateProject - a callback that will be applied to each scenario. It will be
    *     run against a test codebase that will be emitted for this scenario during
    *     {@link Scenarios.forEachScenario}.
-
+   * 
+   *     Note that the callback will not replace existing {@link CallbackMutateProject} callbacks,
+   *     but rather append to them.
+   * 
    * @returns A new `Scenarios` instance created based on the instanced the method was invoked on.
    *     The new instance will have the new {@link CallbackMutateProject} callback appended to all
    *     scenarios.

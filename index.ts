@@ -316,7 +316,12 @@ export class Scenarios {
   }
 }
 
-export const seenScenarios: Scenario[] = [];
+declare global {
+  // eslint-disable-next-line no-var
+  var scenarioTesterSeenScenarios: Scenario[];
+}
+
+global.scenarioTesterSeenScenarios = [];
 
 export class Scenario {
   constructor(
@@ -324,7 +329,7 @@ export class Scenario {
     private callbackCreateProject: CallbackCreateProject,
     private mutators: CallbackMutateProject[]
   ) {
-    seenScenarios.push(this);
+    global.scenarioTesterSeenScenarios.push(this);
   }
 
   async prepare(outdir?: string): Promise<PreparedApp> {

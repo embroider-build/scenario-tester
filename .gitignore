@@ -3,6 +3,7 @@
 /*.js
 /*.js.map
 /build/
+/dist/
 /*.log
 /typedoc
 !.eslintrc.js

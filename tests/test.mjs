@@ -74,7 +74,7 @@ ok 1 project > createHello
 
 Qunit.module('cli', () => {
   Qunit.test('list', async (assert) => {
-    const result = await execa('npx', ['.', 'list', '--files', 'tests/test.mjs', '--matrix'])
+    const result = await execa('node', ['./dist/cli.mjs', 'list', '--files', 'tests/test.mjs', '--matrix'])
 
     const { stdout } = result;
     assert.deepEqual(

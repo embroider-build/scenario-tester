@@ -1,6 +1,6 @@
 import { Project } from 'fixturify-project';
-import { Scenarios } from '../index.js';
-import type { PreparedApp } from '../index.js';
+import { Scenarios } from '../';
+import type { PreparedApp } from '../';
 import Qunit from 'qunit';
 import execa from 'execa';
 
@@ -77,9 +77,7 @@ ok 1 project > createHello
 
 Qunit.module('cli', () => {
   Qunit.test('list', async (assert) => {
-    // I tried to test this using the ts file dirrectly but I couldn't get ts-node/require to work correctly
-    // so I'm just testing against the compiled esm output
-    const result = await execa('npx', ['.', 'list', '--files', './build/tests/test.js', '--matrix'])
+    const result = await execa('node', ['./dist/cli.js', 'list',  '--require', 'ts-node/register', '--files', './tests/test.ts', '--matrix'])
 
     const { stdout } = result;
     assert.deepEqual(

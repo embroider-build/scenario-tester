@@ -4,13 +4,17 @@
   "repository": "https://github.com/ef4/scenario-tester",
   "version": "2.1.2",
   "bin": {
-    "scenario-tester": "./cli.js"
+    "scenario-tester": "./dist/cli.js",
+    "scenario-tester-esm": "./dist/cli.mjs"
   },
-  "main": "index.js",
   "scripts": {
-    "prepare": "tsc",
+    "prepare": "yarn build",
+    "build": "yarn tsup cli.ts index.ts list.ts output.ts --tsconfig tsconfig.esm.json --dts --format esm,cjs",
     "start": "tsc --watch",
-    "test": "qunit test.js",
+    "test": "concurrently --no-color \"npm:test:*\" --names \"test:\"",
+    "test:ts": "node node_modules/.bin/qunit --require ts-node/register tests/test.ts",
+    "test:cjs": "qunit tests/test.cjs",
+    "test:esm": "qunit tests/test.mjs",
     "docs": "typedoc index.ts --out typedoc/",
     "docs:watch": "yarn docs -- --watch",
     "docs:serve": "browser-sync start --server \"typedoc/\" --files \"**/*.html\"",
@@ -18,10 +22,10 @@
     "lint": "eslint '*.ts'"
   },
   "files": [
-    "*.js",
-    "*.d.ts",
-    "*.map",
-    "!test.*"
+    "build/*.js",
+    "build/*.d.ts",
+    "build/*.map",
+    "!build/tests/*"
   ],
   "dependencies": {
     "fixturify-project": "^6.0.0",
@@ -35,6 +39,9 @@
     "node": "18.17.0",
     "yarn": "1.22.18"
   },
+  "resolutions": {
+    "type-fest": "^3.0.0"
+  },
   "devDependencies": {
     "@types/fs-extra": "^9.0.7",
     "@types/qunit": "^2.11.3",
@@ -46,9 +53,25 @@
     "concurrently": "^8.2.0",
     "eslint": "^8.46.0",
     "eslint-plugin-tsdoc": "^0.2.17",
+    "execa": "^5.0.1",
     "lite-server": "^2.6.1",
     "qunit": "^2.18.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-to-dual-package": "^1.2.0",
+    "tsup": "^7.2.0",
     "typedoc": "^0.24.8",
     "typescript": "^5.1.6"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.js"
+    }
   }
 }

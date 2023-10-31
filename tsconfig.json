@@ -1,7 +1,11 @@
 {
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "compilerOptions": {
-    "target": "es2019",
-    "module": "commonjs",
+    "target": "ES2020",
+    "moduleResolution": "node",
     "declaration": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
@@ -15,6 +19,7 @@
   ],
   "exclude": [
     "node_modules/**/*",
-    "typedoc"
+    "typedoc",
+    "build"
   ]
 }

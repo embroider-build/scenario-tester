@@ -1,7 +1,10 @@
-import { Scenario, seenScenarios } from '.';
-import { sync as globSync } from 'glob';
+import { Scenario } from './index.js';
+import glob from 'glob';
 import { resolve } from 'path';
 import { format } from 'util';
+import { createRequire } from 'node:module';
+
+const { sync: globSync } = glob;
 
 export interface ListParams {
   files: string[];
@@ -12,15 +15,24 @@ export interface ListParams {
 export async function list(params: ListParams): Promise<Scenario[]> {
   if (params.require) {
     for (let r of params.require) {
-      require(require.resolve(r, { paths: [process.cwd()]}));
+      if(import.meta.url) {
+        const require = createRequire(import.meta.url);
+        await import(require.resolve(r, { paths: [process.cwd()]}));
+      } else {
+        require(require.resolve(r, { paths: [process.cwd()]}));
+      }
     }
   }
   for (let pattern of params.files) {
     for (let file of globSync(pattern)) {
-      require(resolve(file));
+      if(import.meta.url) {
+        await import(resolve(file));
+      } else {
+        require(resolve(file));
+      }
     }
   }
-  return seenScenarios;
+  return global.scenarioTesterSeenScenarios;
 }
 
 export async function printList(params: ListParams) {

@@ -288,3 +288,6 @@ The other two commands delegate to `scenario-tester`:
     * `--scenario <name>` — pick only one specific scenario.
     * `--outdir <path>` — path to directory, where to emit a derivative project codebase of the scenario. 
 
+### ESM Support
+
+If you are writing your scenario-tests in ESM files you can use the provided `scenario-tester-esm` bin to load your files (exactly as described above). We unfortunately couldn't unify the `scenario-tester` and `scenario-tester-esm` because of a [bug in ts-node](https://github.com/TypeStrong/ts-node/issues/1997) that prevented us from adding ESM support as a minor non-breaking change. If this gets fixed upstream we could potentially unify the implementations in a future release.

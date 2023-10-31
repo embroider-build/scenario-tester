@@ -1,25 +1,24 @@
 {
   "name": "scenario-tester",
-  "author": "Edward Faulkner <edward@eaf4.com>",
-  "repository": "https://github.com/ef4/scenario-tester",
   "version": "2.1.2",
+  "repository": "https://github.com/ef4/scenario-tester",
+  "license": "MIT",
+  "author": "Edward Faulkner <edward@eaf4.com>",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.js"
+    }
+  },
   "bin": {
     "scenario-tester": "./dist/cli.js",
     "scenario-tester-esm": "./dist/cli.mjs"
-  },
-  "scripts": {
-    "prepare": "yarn build",
-    "build": "yarn tsup cli.ts index.ts list.ts output.ts --tsconfig tsconfig.esm.json --dts --format esm,cjs",
-    "start": "tsc --watch",
-    "test": "concurrently --no-color \"npm:test:*\" --names \"test:\"",
-    "test:ts": "node node_modules/.bin/qunit --require ts-node/register tests/test.ts",
-    "test:cjs": "qunit tests/test.cjs",
-    "test:esm": "qunit tests/test.mjs",
-    "docs": "typedoc --tsconfig tsconfig.esm.json index.ts --out typedoc/",
-    "docs:watch": "yarn docs -- --watch",
-    "docs:serve": "browser-sync start --server \"typedoc/\" --files \"**/*.html\"",
-    "docs:dev": "concurrently \"yarn docs:watch\" \"yarn docs:serve\"",
-    "lint": "eslint '*.ts'"
   },
   "files": [
     "build/*.js",
@@ -27,20 +26,29 @@
     "build/*.map",
     "!build/tests/*"
   ],
+  "scripts": {
+    "build": "yarn tsup cli.ts index.ts list.ts output.ts --tsconfig tsconfig.esm.json --dts --format esm,cjs",
+    "docs": "typedoc --tsconfig tsconfig.esm.json index.ts --out typedoc/",
+    "docs:dev": "concurrently \"yarn docs:watch\" \"yarn docs:serve\"",
+    "docs:serve": "browser-sync start --server \"typedoc/\" --files \"**/*.html\"",
+    "docs:watch": "yarn docs -- --watch",
+    "lint": "eslint '*.ts'",
+    "prepare": "yarn build",
+    "start": "tsc --watch",
+    "test": "concurrently --no-color \"npm:test:*\" --names \"test:\"",
+    "test:cjs": "qunit tests/test.cjs",
+    "test:esm": "qunit tests/test.mjs",
+    "test:ts": "node node_modules/.bin/qunit --require ts-node/register tests/test.ts"
+  },
+  "resolutions": {
+    "type-fest": "^3.0.0"
+  },
   "dependencies": {
     "fixturify-project": "^6.0.0",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "tmp": "^0.2.1",
     "yargs": "^16.2.0"
-  },
-  "license": "MIT",
-  "volta": {
-    "node": "18.17.0",
-    "yarn": "1.22.18"
-  },
-  "resolutions": {
-    "type-fest": "^3.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.7",
@@ -62,16 +70,8 @@
     "typedoc": "^0.24.8",
     "typescript": "^5.1.6"
   },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "import": "./dist/*.mjs",
-      "require": "./dist/*.js"
-    }
+  "volta": {
+    "node": "18.17.0",
+    "yarn": "1.22.18"
   }
 }

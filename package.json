@@ -21,10 +21,7 @@
     "scenario-tester-esm": "./dist/cli.mjs"
   },
   "files": [
-    "build/*.js",
-    "build/*.d.ts",
-    "build/*.map",
-    "!build/tests/*"
+    "dist/"
   ],
   "scripts": {
     "build": "yarn tsup cli.ts index.ts list.ts output.ts --tsconfig tsconfig.esm.json --dts --format esm,cjs",

@@ -15,7 +15,7 @@
     "test:ts": "node node_modules/.bin/qunit --require ts-node/register tests/test.ts",
     "test:cjs": "qunit tests/test.cjs",
     "test:esm": "qunit tests/test.mjs",
-    "docs": "typedoc index.ts --out typedoc/",
+    "docs": "typedoc --tsconfig tsconfig.esm.json index.ts --out typedoc/",
     "docs:watch": "yarn docs -- --watch",
     "docs:serve": "browser-sync start --server \"typedoc/\" --files \"**/*.html\"",
     "docs:dev": "concurrently \"yarn docs:watch\" \"yarn docs:serve\"",

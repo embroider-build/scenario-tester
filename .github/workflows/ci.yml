@@ -20,12 +20,15 @@ jobs:
         os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: yarn
+          cache: pnpm
 
-      - run: yarn --frozen-lockfile
-      - run: yarn prepare
-      - run: yarn lint
-      - run: yarn test
+      - run: pnpm i --frozen-lockfile
+      - run: pnpm prepare
+      - run: pnpm lint
+      - run: pnpm test

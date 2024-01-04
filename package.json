@@ -16,6 +16,13 @@
       "require": "./dist/*.js"
     }
   },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*"
+      ]
+    }
+  },
   "bin": {
     "scenario-tester": "./dist/cli.js",
     "scenario-tester-esm": "./dist/cli.mjs"
@@ -40,13 +47,6 @@
   "resolutions": {
     "type-fest": "^3.0.0"
   },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "dist/*"
-      ]
-    }
-  },
   "dependencies": {
     "fixturify-project": "^6.0.0",
     "fs-extra": "^9.1.0",
@@ -57,6 +57,7 @@
   "devDependencies": {
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "@types/fs-extra": "^9.0.7",
+    "@types/glob": "^8.1.0",
     "@types/qunit": "^2.11.3",
     "@types/tmp": "^0.2.0",
     "@types/yargs": "^16.0.0",
@@ -70,7 +71,7 @@
     "lite-server": "^2.6.1",
     "qunit": "^2.18.0",
     "release-it": "^15.5.0",
-    "release-plan": "^0.5.0",
+    "release-plan": "^0.6.0",
     "ts-node": "^10.9.1",
     "tsconfig-to-dual-package": "^1.2.0",
     "tsup": "^7.2.0",

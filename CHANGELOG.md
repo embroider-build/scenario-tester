@@ -1,4 +1,19 @@
 # scenario-tester Changelog
+## Release (2024-01-04)
+
+scenario-tester 3.0.1 (patch)
+
+#### :bug: Bug Fix
+* `scenario-tester`
+  * [#25](https://github.com/embroider-build/scenario-tester/pull/25) fix types discovery for node10 projects ([@mansona](https://github.com/mansona))
+
+#### :house: Internal
+* `scenario-tester`
+  * [#28](https://github.com/embroider-build/scenario-tester/pull/28) fix changelog header ([@mansona](https://github.com/mansona))
+  * [#27](https://github.com/embroider-build/scenario-tester/pull/27) convert to pnpm ([@mansona](https://github.com/mansona))
+
+#### Committers: 1
+- Chris Manson ([@mansona](https://github.com/mansona))
 
 ## v3.0.0 (2023-11-08)
 

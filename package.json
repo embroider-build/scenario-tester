@@ -42,7 +42,7 @@
     "test": "concurrently --no-color \"npm:test:*\" --names \"test:\"",
     "test:cjs": "qunit tests/test.cjs",
     "test:esm": "qunit tests/test.mjs",
-    "test:ts": "node node_modules/.bin/qunit --require ts-node/register tests/test.ts"
+    "test:ts": "npx qunit --require ts-node/register tests/test.ts"
   },
   "resolutions": {
     "type-fest": "^3.0.0"

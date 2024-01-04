@@ -40,6 +40,13 @@
   "resolutions": {
     "type-fest": "^3.0.0"
   },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*"
+      ]
+    }
+  },
   "dependencies": {
     "fixturify-project": "^6.0.0",
     "fs-extra": "^9.1.0",

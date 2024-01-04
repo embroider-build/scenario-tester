@@ -1,6 +1,6 @@
 import { Project } from 'fixturify-project';
-import { Scenarios } from '../';
-import type { PreparedApp } from '../';
+import { Scenarios } from '../dist/';
+import type { PreparedApp } from '../dist/';
 import Qunit from 'qunit';
 import execa from 'execa';
 

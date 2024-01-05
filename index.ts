@@ -265,9 +265,9 @@ export class Scenarios {
         type: 'derived',
         parent: this.state.parent,
         variants: Object.fromEntries(
-          Object.entries(this.state.variants).map(([variantName, mutators]) => [
+          Object.entries(this.state.variants).map(([variantName, variant]) => [
             `${variantName}-${name}`,
-            { status: 'active', project: [...mutators.project, callbackMutateProject]},
+            { status: variant.status, project: [...variant.project, callbackMutateProject]},
           ])
         ),
       });

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Scenario } from './index.js';
 import glob from 'glob';
 import { resolve } from 'path';
@@ -15,8 +16,11 @@ export interface ListParams {
 export async function list(params: ListParams): Promise<Scenario[]> {
   if (params.require) {
     for (let r of params.require) {
+      // @ts-ignore this doesn't actually fail since we're checking before using it
       if(import.meta.url) {
+        // @ts-ignore
         const require = createRequire(import.meta.url);
+        // @ts-ignore this will only happen if we have import.meta.url
         await import(require.resolve(r, { paths: [process.cwd()]}));
       } else {
         require(require.resolve(r, { paths: [process.cwd()]}));
@@ -25,7 +29,9 @@ export async function list(params: ListParams): Promise<Scenario[]> {
   }
   for (let pattern of params.files) {
     for (let file of globSync(pattern)) {
+      // @ts-ignore
       if(import.meta.url) {
+        // @ts-ignore
         await import(resolve(file));
       } else {
         require(resolve(file));

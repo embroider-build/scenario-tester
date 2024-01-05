@@ -18,14 +18,22 @@ function hello2(project: Project) {
   });
 }
 
+function skipMe(/* project: Project */) {
+  // do nothing
+}
+
 const scenarios = Scenarios.fromDir('./tests/fixtures/app').expand({
   hello1,
   hello2,
+  skipMe,
 });
 
 type TestContext = { app: PreparedApp };
 
-scenarios.forEachScenario((scenario) => {
+scenarios
+  .skip('skipMe')
+  .skip('skipMe') // show that skipping twice doesn't crash
+  .forEachScenario((scenario) => {
   Qunit.module(scenario.name, (hooks) => {
     hooks.before(async function (this: TestContext) {
       this.app = await scenario.prepare();

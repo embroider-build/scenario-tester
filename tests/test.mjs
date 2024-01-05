@@ -16,13 +16,21 @@ function hello2(project) {
   });
 }
 
+function skipMe(project) {
+  // do nothing
+}
+
 const scenarios = Scenarios.fromDir('./tests/fixtures/app').expand({
   hello1,
   hello2,
+  skipMe,
 });
 
 
-scenarios.forEachScenario((scenario) => {
+scenarios
+  .skip('skipMe')
+  .skip('skipMe') // show that skipping twice doesn't crash
+  .forEachScenario((scenario) => {
   Qunit.module(scenario.name, (hooks) => {
     hooks.before(async function () {
       this.app = await scenario.prepare();

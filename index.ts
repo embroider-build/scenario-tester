@@ -32,6 +32,8 @@ export type CallbackMutateProject = (project: Project) => void | Promise<void>;
  */
 export type CallbackDefineTests = (scenario: Scenario) => void;
 
+type SkippableVariant = { status: 'active' | 'skipped', project: CallbackMutateProject[]};
+
 export { Project };
 
 type State =
@@ -42,7 +44,7 @@ type State =
   | {
       type: 'derived';
       parent: Scenarios;
-      variants: Record<string, CallbackMutateProject[]>;
+      variants: Record<string, SkippableVariant>;
     };
 
 /**
@@ -167,7 +169,7 @@ export class Scenarios {
       type: 'derived',
       parent: this,
       variants: Object.fromEntries(
-        Object.entries(variants).map(([variantName, mutator]) => [variantName, [mutator]])
+        Object.entries(variants).map(([variantName, mutator]) => [variantName, { status: 'active', project: [mutator]}])
       ),
     });
   }
@@ -189,7 +191,7 @@ export class Scenarios {
       );
     }
     let variants = Object.assign({}, this.state.variants);
-    delete variants[variantName];
+    variants[variantName].status = 'skipped';
     return new Scenarios({
       type: 'derived',
       parent: this.state.parent,
@@ -255,7 +257,7 @@ export class Scenarios {
         type: 'derived',
         parent: this,
         variants: {
-          [name]: [callbackMutateProject],
+          [name]: { status: 'active', project: [callbackMutateProject]},
         },
       });
     } else {
@@ -265,7 +267,7 @@ export class Scenarios {
         variants: Object.fromEntries(
           Object.entries(this.state.variants).map(([variantName, mutators]) => [
             `${variantName}-${name}`,
-            [...mutators, callbackMutateProject],
+            { status: 'active', project: [...mutators.project, callbackMutateProject]},
           ])
         ),
       });
@@ -284,12 +286,15 @@ export class Scenarios {
     } else {
       let state = this.state;
       this.state.parent.iterate((parent) => {
-        for (let [variantName, mutators] of Object.entries(state.variants)) {
+        for (let [variantName, variant] of Object.entries(state.variants)) {
+          if(variant.status === 'skipped') {
+            continue;
+          }
           let combinedName = parent.name ? `${parent.name}-${variantName}` : variantName;
           fn({
             name: combinedName,
             callbackCreateProject: parent.callbackCreateProject,
-            mutators: [...parent.mutators, ...mutators],
+            mutators: [...parent.mutators, ...variant.project],
           });
         }
       });

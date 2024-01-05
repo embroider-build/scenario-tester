@@ -31,13 +31,13 @@
     "dist/"
   ],
   "scripts": {
-    "build": "yarn tsup cli.ts index.ts list.ts output.ts --tsconfig tsconfig.esm.json --dts --format esm,cjs",
+    "build": "pnpm tsup cli.ts index.ts list.ts output.ts --tsconfig tsconfig.esm.json --dts --format esm,cjs",
     "docs": "typedoc --tsconfig tsconfig.esm.json index.ts --out typedoc/",
-    "docs:dev": "concurrently \"yarn docs:watch\" \"yarn docs:serve\"",
+    "docs:dev": "concurrently \"pnpm docs:watch\" \"pnpm docs:serve\"",
     "docs:serve": "browser-sync start --server \"typedoc/\" --files \"**/*.html\"",
-    "docs:watch": "yarn docs -- --watch",
+    "docs:watch": "pnpm docs -- --watch",
     "lint": "eslint '*.ts'",
-    "prepare": "yarn build",
+    "prepare": "pnpm build",
     "start": "tsc --watch",
     "test": "concurrently --no-color \"npm:test:*\" --names \"test:\"",
     "test:cjs": "qunit tests/test.cjs",
@@ -79,8 +79,7 @@
     "typescript": "^5.1.6"
   },
   "volta": {
-    "node": "18.17.0",
-    "yarn": "1.22.18"
+    "node": "18.17.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

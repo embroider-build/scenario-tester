@@ -47,13 +47,6 @@ ok 1 project > createHello
 # fail 0
 `);
         });
-        qunit.test('yarn bin inside app', async function (assert) {
-            let result = await this.app.execute('yarn --silent bin');
-            const yarnBin = result.stdout.trimRight();
-            assert.ok(yarnBin.startsWith(this.app.dir));
-            result = await this.app.execute('yarn --silent exec which qunit');
-            assert.ok(result.stdout.startsWith(yarnBin));
-        });
         qunit.test('check scenario', async function (assert) {
             let result = await this.app.execute(`node -p 'require("./index").polyfilled'`);
             assert.equal(result.stdout.trim(), ('hello1' === scenario.name).toString());

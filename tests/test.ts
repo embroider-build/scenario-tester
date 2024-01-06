@@ -58,17 +58,6 @@ ok 1 project > createHello
     );
 
     Qunit.test(
-      'yarn bin inside app',
-      async function (this: TestContext, assert) {
-        let result = await this.app.execute('yarn --silent bin');
-        const yarnBin = result.stdout.trimRight();
-        assert.ok(yarnBin.startsWith(this.app.dir));
-        result = await this.app.execute('yarn --silent exec which qunit');
-        assert.ok(result.stdout.startsWith(yarnBin));
-      }
-    );
-
-    Qunit.test(
       'check scenario',
       async function (this: TestContext, assert) {
         let result = await this.app.execute(

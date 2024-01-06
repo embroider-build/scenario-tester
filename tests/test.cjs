@@ -36,8 +36,8 @@ scenarios
         hooks.before(async function () {
             this.app = await scenario.prepare();
         });
-        qunit.test('yarn test', async function (assert) {
-            const result = await this.app.execute('yarn --silent test');
+        qunit.test('pnpm test', async function (assert) {
+            const result = await this.app.execute('pnpm --silent test');
             assert.equal(result.stdout, `TAP version 13
 ok 1 project > createHello
 1..1

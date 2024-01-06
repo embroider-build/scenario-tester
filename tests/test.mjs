@@ -37,9 +37,9 @@ scenarios
     });
 
     Qunit.test(
-      'yarn test',
+      'pnpm test',
       async function (assert) {
-        const result = await this.app.execute('yarn --silent test');
+        const result = await this.app.execute('pnpm --silent test');
         assert.equal(
           result.stdout,
           `TAP version 13

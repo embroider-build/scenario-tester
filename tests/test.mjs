@@ -16,22 +16,30 @@ function hello2(project) {
   });
 }
 
+function skipMe(project) {
+  // do nothing
+}
+
 const scenarios = Scenarios.fromDir('./tests/fixtures/app').expand({
   hello1,
   hello2,
+  skipMe,
 });
 
 
-scenarios.forEachScenario((scenario) => {
+scenarios
+  .skip('skipMe')
+  .skip('skipMe') // show that skipping twice doesn't crash
+  .forEachScenario((scenario) => {
   Qunit.module(scenario.name, (hooks) => {
     hooks.before(async function () {
       this.app = await scenario.prepare();
     });
 
     Qunit.test(
-      'yarn test',
+      'pnpm test',
       async function (assert) {
-        const result = await this.app.execute('yarn --silent test');
+        const result = await this.app.execute('pnpm --silent test');
         assert.equal(
           result.stdout,
           `TAP version 13
@@ -46,16 +54,6 @@ ok 1 project > createHello
       }
     );
 
-    Qunit.test(
-      'yarn bin inside app',
-      async function (assert) {
-        let result = await this.app.execute('yarn --silent bin');
-        const yarnBin = result.stdout.trimRight();
-        assert.ok(yarnBin.startsWith(this.app.dir));
-        result = await this.app.execute('yarn --silent exec which qunit');
-        assert.ok(result.stdout.startsWith(yarnBin));
-      }
-    );
 
     Qunit.test(
       'check scenario',

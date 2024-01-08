@@ -1,13 +1,13 @@
 {
   "solution": {
     "scenario-tester": {
-      "impact": "patch",
-      "oldVersion": "3.0.0",
-      "newVersion": "3.0.1",
+      "impact": "minor",
+      "oldVersion": "3.0.1",
+      "newVersion": "3.1.0",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         },
         {
           "impact": "patch",
@@ -17,5 +17,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2024-01-04)\n\nscenario-tester 3.0.1 (patch)\n\n#### :bug: Bug Fix\n* `scenario-tester`\n  * [#25](https://github.com/embroider-build/scenario-tester/pull/25) fix types discovery for node10 projects ([@mansona](https://github.com/mansona))\n\n#### :house: Internal\n* `scenario-tester`\n  * [#28](https://github.com/embroider-build/scenario-tester/pull/28) fix changelog header ([@mansona](https://github.com/mansona))\n  * [#27](https://github.com/embroider-build/scenario-tester/pull/27) convert to pnpm ([@mansona](https://github.com/mansona))\n\n#### Committers: 1\n- Chris Manson ([@mansona](https://github.com/mansona))\n"
+  "description": "## Release (2024-01-08)\n\nscenario-tester 3.1.0 (minor)\n\n#### :rocket: Enhancement\n* `scenario-tester`\n  * [#30](https://github.com/embroider-build/scenario-tester/pull/30) Allow you to call skip twice with the same name ([@mansona](https://github.com/mansona))\n\n#### :house: Internal\n* `scenario-tester`\n  * [#32](https://github.com/embroider-build/scenario-tester/pull/32) fix docs build ([@mansona](https://github.com/mansona))\n\n#### Committers: 1\n- Chris Manson ([@mansona](https://github.com/mansona))\n"
 }

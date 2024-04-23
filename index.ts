@@ -1,6 +1,6 @@
 import { Project } from 'fixturify-project';
 import { setGracefulCleanup } from 'tmp';
-import { spawn } from 'child_process';
+import { spawn, exec } from 'child_process';
 
 setGracefulCleanup();
 
@@ -328,6 +328,22 @@ declare global {
 
 global.scenarioTesterSeenScenarios = [];
 
+// cannot use util.promisify
+// because then qunit will exit early with
+// an error about an async hold
+function execPromise(command: string): Promise<string> {
+  return new Promise(function (resolve, reject) {
+    exec(command, (error, stdout) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(stdout.trim());
+    });
+  });
+}
+
+
 export class Scenario {
   constructor(
     public name: string,
@@ -346,6 +362,19 @@ export class Scenario {
     if (outdir) {
       project.baseDir = outdir;
     }
+
+    if (process.platform === 'win32') {
+      // windows sometimes generates short path alias 8.3
+      // which leads to resolving errors later
+      // e.g. cannot find owning engine for C:\Users\runneradmin\AppData\Local\Temp\tmp-2256UvRXnGotcjxi\node_modules\.embroider\rewritten-app
+      // the value in engines are:          C:\Users\RUNNER~1\AppData\Local\Temp\tmp-2256UvRXnGotcjxi\node_modules\.embroider\rewritten-app
+      // it looks like there is no way to fix this in JS with
+      // e.g fs.realpath, resolve, normalize
+      // Powershell command can be used, python could also resolve it...
+      const command = `powershell.exe -command "(Get-Item -LiteralPath '${project.baseDir}').FullName"`;
+      project.baseDir = await execPromise(command);
+    }
+
     await project.write();
     return new PreparedApp(project.baseDir);
   }

@@ -48,7 +48,7 @@
     "type-fest": "^3.0.0"
   },
   "dependencies": {
-    "fixturify-project": "^6.0.0",
+    "fixturify-project": "^7.1.0",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "tmp": "^0.2.1",

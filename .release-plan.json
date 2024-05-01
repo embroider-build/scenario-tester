@@ -1,21 +1,17 @@
 {
   "solution": {
     "scenario-tester": {
-      "impact": "minor",
-      "oldVersion": "3.0.1",
-      "newVersion": "3.1.0",
+      "impact": "major",
+      "oldVersion": "3.1.0",
+      "newVersion": "4.0.0",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
+          "impact": "major",
+          "reason": "Appears in changelog section :boom: Breaking Change"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2024-01-08)\n\nscenario-tester 3.1.0 (minor)\n\n#### :rocket: Enhancement\n* `scenario-tester`\n  * [#30](https://github.com/embroider-build/scenario-tester/pull/30) Allow you to call skip twice with the same name ([@mansona](https://github.com/mansona))\n\n#### :house: Internal\n* `scenario-tester`\n  * [#32](https://github.com/embroider-build/scenario-tester/pull/32) fix docs build ([@mansona](https://github.com/mansona))\n\n#### Committers: 1\n- Chris Manson ([@mansona](https://github.com/mansona))\n"
+  "description": "## Release (2024-05-01)\n\nscenario-tester 4.0.0 (major)\n\n#### :boom: Breaking Change\n* `scenario-tester`\n  * [#34](https://github.com/embroider-build/scenario-tester/pull/34) update fixturify-project ([@ef4](https://github.com/ef4))\n\n#### Committers: 1\n- Edward Faulkner ([@ef4](https://github.com/ef4))\n"
 }

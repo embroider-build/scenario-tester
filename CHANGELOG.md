@@ -1,4 +1,14 @@
 # scenario-tester Changelog
+## Release (2024-05-01)
+
+scenario-tester 4.0.0 (major)
+
+#### :boom: Breaking Change
+* `scenario-tester`
+  * [#34](https://github.com/embroider-build/scenario-tester/pull/34) update fixturify-project ([@ef4](https://github.com/ef4))
+
+#### Committers: 1
+- Edward Faulkner ([@ef4](https://github.com/ef4))
 ## Release (2024-01-08)
 
 scenario-tester 3.1.0 (minor)

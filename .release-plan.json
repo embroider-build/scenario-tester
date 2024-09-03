@@ -1,17 +1,17 @@
 {
   "solution": {
     "scenario-tester": {
-      "impact": "minor",
-      "oldVersion": "4.0.0",
-      "newVersion": "4.1.0",
+      "impact": "patch",
+      "oldVersion": "4.1.0",
+      "newVersion": "4.1.1",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2024-09-03)\n\nscenario-tester 4.1.0 (minor)\n\n#### :rocket: Enhancement\n* `scenario-tester`\n  * [#36](https://github.com/embroider-build/scenario-tester/pull/36) New option to skip all variants ([@ef4](https://github.com/ef4))\n\n#### Committers: 1\n- Edward Faulkner ([@ef4](https://github.com/ef4))\n"
+  "description": "## Release (2024-09-03)\n\nscenario-tester 4.1.1 (patch)\n\n#### :bug: Bug Fix\n* `scenario-tester`\n  * [#38](https://github.com/embroider-build/scenario-tester/pull/38) Fix accidental mutation ([@ef4](https://github.com/ef4))\n\n#### Committers: 1\n- Edward Faulkner ([@ef4](https://github.com/ef4))\n"
 }

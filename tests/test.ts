@@ -72,6 +72,15 @@ ok 1 project > createHello
   });
 });
 
+const skipExpandedExample = Scenarios.fromProject(() => new Project());
+skipExpandedExample
+  .expand({
+    'child-one-of-other-root': () => {},
+    'child-two-of-other-root': () => {},
+  }).skip().map('inner', () => {}) // skip with no arguments skips all variants
+  .forEachScenario(() => {});
+
+
 Qunit.module('cli', () => {
   Qunit.test('list', async (assert) => {
     const result = await execa('node', ['./dist/cli.js', 'list',  '--require', 'ts-node/register', '--files', './tests/test.ts', '--matrix'])

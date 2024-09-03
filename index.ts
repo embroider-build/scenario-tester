@@ -179,26 +179,34 @@ export class Scenarios {
    *     with name name of the base scenario: <base>-<derived>.
    * @returns a new `Scenarios` instance with the given scenario removed.
    */
-  skip(variantName: string): Scenarios {
+  skip(): Scenarios;
+  skip(variantName: string): Scenarios;
+  skip(variantName?: string): Scenarios {
     if (this.state.type === 'root') {
-      throw new Error(`no variant named ${variantName} available to skip on root scenario`);
+      throw new Error('cannot call skip() on root scenarios');
     }
-    if (!this.state.variants[variantName]) {
-      throw new Error(
-        `no variant named ${variantName} available to skip. Found variants: ${Object.keys(
-          this.state.variants
-        ).join(', ')}`
-      );
-    }
+
     let variants = Object.assign({}, this.state.variants);
-    variants[variantName].status = 'skipped';
+    if (variantName) {
+      if (!this.state.variants[variantName]) {
+        throw new Error(
+          `no variant named ${variantName} available to skip. Found variants: ${Object.keys(
+            this.state.variants
+          ).join(', ')}`
+        );
+      }
+      variants[variantName].status = 'skipped';
+    } else {
+      for (let variant of Object.values(variants)) {
+        variant.status = 'skipped';
+      }
+    }
     return new Scenarios({
       type: 'derived',
       parent: this.state.parent,
       variants,
     });
   }
-
 
   /**
    * @param variantName - name of scenario to keep. Note: names of derived scenarios are prepended

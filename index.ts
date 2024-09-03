@@ -186,12 +186,18 @@ export class Scenarios {
       throw new Error('cannot call skip() on root scenarios');
     }
 
-    let variants = Object.assign({}, this.state.variants);
+    let variants = Object.fromEntries(
+      Object.entries(this.state.variants).map(([variantName, entry]) => [
+        variantName,
+        Object.assign({}, entry),
+      ])
+    );
+
     if (variantName) {
-      if (!this.state.variants[variantName]) {
+      if (!variants[variantName]) {
         throw new Error(
           `no variant named ${variantName} available to skip. Found variants: ${Object.keys(
-            this.state.variants
+            variants
           ).join(', ')}`
         );
       }

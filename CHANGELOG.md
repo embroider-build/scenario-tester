@@ -1,6 +1,16 @@
 # scenario-tester Changelog
 ## Release (2024-09-03)
 
+scenario-tester 4.1.1 (patch)
+
+#### :bug: Bug Fix
+* `scenario-tester`
+  * [#38](https://github.com/embroider-build/scenario-tester/pull/38) Fix accidental mutation ([@ef4](https://github.com/ef4))
+
+#### Committers: 1
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+## Release (2024-09-03)
+
 scenario-tester 4.1.0 (minor)
 
 #### :rocket: Enhancement

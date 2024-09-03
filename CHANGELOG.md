@@ -1,4 +1,14 @@
 # scenario-tester Changelog
+## Release (2024-09-03)
+
+scenario-tester 4.1.0 (minor)
+
+#### :rocket: Enhancement
+* `scenario-tester`
+  * [#36](https://github.com/embroider-build/scenario-tester/pull/36) New option to skip all variants ([@ef4](https://github.com/ef4))
+
+#### Committers: 1
+- Edward Faulkner ([@ef4](https://github.com/ef4))
 ## Release (2024-05-01)
 
 scenario-tester 4.0.0 (major)

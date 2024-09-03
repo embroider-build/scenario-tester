@@ -72,13 +72,16 @@ ok 1 project > createHello
   });
 });
 
-const skipExpandedExample = Scenarios.fromProject(() => new Project());
-skipExpandedExample
-  .expand({
-    'child-one-of-other-root': () => {},
-    'child-two-of-other-root': () => {},
-  }).skip().map('inner', () => {}) // skip with no arguments skips all variants
+const skipTester = Scenarios.fromProject(() => new Project()).expand({
+  'variant-one': () => {},
+  'variant-two': () => {},
+})
+
+
+skipTester.skip().map('skipped', () => {}) // skip with no arguments skips all variants
   .forEachScenario(() => {});
+
+skipTester.map('not-skipped', () => {} ).forEachScenario(() => {});
 
 
 Qunit.module('cli', () => {
@@ -88,7 +91,7 @@ Qunit.module('cli', () => {
     const { stdout } = result;
     assert.deepEqual(
         stdout.split('\n'),
-      ['hello1', 'hello2']
+      ['hello1', 'hello2', 'variant-one-not-skipped', 'variant-two-not-skipped']
     );
   });
 });

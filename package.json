@@ -31,12 +31,12 @@
     "dist/"
   ],
   "scripts": {
-    "build": "pnpm tsup cli.ts index.ts list.ts output.ts --tsconfig tsconfig.esm.json --dts --format esm,cjs",
-    "docs": "typedoc --tsconfig tsconfig.esm.json index.ts --out typedoc/",
+    "build": "pnpm tsup src/cli.ts src/index.ts src/list.ts src/output.ts --tsconfig tsconfig.esm.json --dts --format esm,cjs",
+    "docs": "typedoc --tsconfig tsconfig.esm.json src/index.ts --out typedoc/",
     "docs:dev": "concurrently \"pnpm docs:watch\" \"pnpm docs:serve\"",
     "docs:serve": "browser-sync start --server \"typedoc/\" --files \"**/*.html\"",
     "docs:watch": "pnpm docs -- --watch",
-    "lint": "eslint '*.ts'",
+    "lint": "eslint 'src/*.ts'",
     "prepare": "pnpm build",
     "start": "tsc --watch",
     "test": "concurrently --no-color \"npm:test:*\" --names \"test:\"",

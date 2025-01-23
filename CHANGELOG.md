@@ -1,4 +1,19 @@
 # scenario-tester Changelog
+
+## Release (2025-01-23)
+
+scenario-tester 5.0.0 (major)
+
+#### :boom: Breaking Change
+* `scenario-tester`
+  * [#41](https://github.com/embroider-build/scenario-tester/pull/41) Drop unsupported node versions ([@ef4](https://github.com/ef4))
+
+#### :house: Internal
+* `scenario-tester`
+  * [#43](https://github.com/embroider-build/scenario-tester/pull/43) adjust pnpm version in typedoc job ([@ef4](https://github.com/ef4))
+
+#### Committers: 1
+- Edward Faulkner ([@ef4](https://github.com/ef4))
 ## Release (2024-09-03)
 
 scenario-tester 4.1.1 (patch)

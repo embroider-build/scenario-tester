@@ -1,6 +1,6 @@
 {
   "name": "scenario-tester",
-  "version": "4.1.1",
+  "version": "5.0.0",
   "repository": "https://github.com/embroider-build/scenario-tester",
   "license": "MIT",
   "author": "Edward Faulkner <edward@eaf4.com>",
